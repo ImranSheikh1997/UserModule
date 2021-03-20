@@ -1,0 +1,62 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    password: GlobalVox@1243#
+    url: jdbc:mysql://localhost:3306/usermodule
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
+    open-in-view: true
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: is463856@gmail.com
+    password: Imran@GlobalVox
+
+    properties:
+      mail:
+        debug: true
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+        socketFactory:
+          class: javax.net.ssl.SSLSocketFactory
+          port: 465
+          fallback: false
+
+  #Multipart Properties(Properties for file upload)
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 30MB
+      max-request-size: 50MB
+
+
+support.email: is463856@gmail.com
