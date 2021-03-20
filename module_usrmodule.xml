@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_usrmodule" default="compile.module.usrmodule">
+  <dirname property="module.usrmodule.basedir" file="${ant.file.module_usrmodule}"/>
+  
+  <property name="module.jdk.home.usrmodule" value="${jdk.home.1.8}"/>
+  <property name="module.jdk.bin.usrmodule" value="${jdk.bin.1.8}"/>
+  <property name="module.jdk.classpath.usrmodule" value="jdk.classpath.1.8"/>
+  
+  <property name="compiler.args.usrmodule" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="usrmodule.output.dir" value="${module.usrmodule.basedir}/out/production/usrmodule"/>
+  <property name="usrmodule.testoutput.dir" value="${module.usrmodule.basedir}/out/test/usrmodule"/>
+  
+  <path id="usrmodule.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="usrmodule.module.production.classpath">
+    <path refid="${module.jdk.classpath.usrmodule}"/>
+  </path>
+  
+  <path id="usrmodule.runtime.production.module.classpath">
+    <pathelement location="${usrmodule.output.dir}"/>
+  </path>
+  
+  <path id="usrmodule.module.classpath">
+    <path refid="${module.jdk.classpath.usrmodule}"/>
+    <pathelement location="${usrmodule.output.dir}"/>
+  </path>
+  
+  <path id="usrmodule.runtime.module.classpath">
+    <pathelement location="${usrmodule.testoutput.dir}"/>
+    <pathelement location="${usrmodule.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.usrmodule">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.usrmodule">
+    <patternset refid="excluded.from.module.usrmodule"/>
+  </patternset>
+  
+  
+  <target name="compile.module.usrmodule" depends="compile.module.usrmodule.production,compile.module.usrmodule.tests" description="Compile module usrmodule"/>
+  
+  <target name="compile.module.usrmodule.production" depends="register.custom.compilers" description="Compile module usrmodule; production classes"/>
+  
+  <target name="compile.module.usrmodule.tests" depends="register.custom.compilers,compile.module.usrmodule.production" description="compile module usrmodule; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.usrmodule" description="cleanup module">
+    <delete dir="${usrmodule.output.dir}"/>
+    <delete dir="${usrmodule.testoutput.dir}"/>
+  </target>
+</project>
